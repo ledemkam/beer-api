@@ -1,24 +1,50 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { Component } from "react";
 import Navigation from "../Components/Navigation";
-import Card2 from "../Components/Card2";
+import { Link } from "react-router-dom";
+import "../style/Bierdetail.css";
 
-export const Bierdetail = () => {
-  const [bierrandom, setBierrandom] = useState([]);
-  useEffect(() => {
-    axios
-      .get("https://ih-beers-api2.herokuapp.com/beers/random")
-      .then((response) => console.log(response.data));
-  });
+class Bierdetail extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bierdetail: [],
+    };
+  }
 
-  return (
-    <div className="allbeers">
-      <div className="results">
-        {bierrandom.map((bier) => (
-          <Card2 key={bier._id} bier={bier} />
-        ))}
-      </div>
-      <Navigation />
-    </div>
-  );
-};
+  componentDidMount() {
+    fetch("https://ih-beers-api2.herokuapp.com/beers/random")
+      .then((response) => response.json())
+      .then((data) => this.setState({ bierdetail: data }));
+  }
+  render() {
+    return (
+      <main className="randombeer">
+        <section>
+          <article className="arts">
+            <img src={this.state.bierdetail.image_url} alt="" />
+          </article>
+
+          <article>
+            <div>
+              <h1>{this.state.bierdetail.name}</h1>
+              <h2>{this.state.bierdetail.tagline}</h2>
+            </div>
+            <div>
+              <p>First brewed:</p>
+              <p>{this.state.bierdetail.first_brewed}</p>
+            </div>
+            <div>
+              <p>Attenuation Level:</p>
+              <p>{this.state.bierdetail.attenuation_level}</p>
+            </div>
+            <p>{this.state.bierdetail.description}</p>
+          </article>
+        </section>
+        <Link to="/allbeers">Back</Link>
+        <Navigation />
+      </main>
+    );
+  }
+}
+
+export default Bierdetail;
