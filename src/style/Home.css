@@ -1,0 +1,38 @@
+.Home {
+  height: 100vh;
+  margin-top: 2%;
+}
+article {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+section {
+  width: 40%;
+  background-color: #fff;
+}
+figure img {
+  width: 100%;
+}
+figcaption {
+  font-weight: 700;
+  font-size: 30px;
+  height: 46px;
+  width: 100%;
+  background: #ffca41;
+  padding-left: 12px;
+}
+figcaption a {
+  color: #fff;
+  text-decoration: none;
+}
+.lorem {
+  height: 72px;
+  width: 100%;
+  color: #3333333;
+  padding-left: 38px;
+}
